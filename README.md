@@ -22,3 +22,37 @@ First, create a new directory and initialize it with `uv`:
 mkdir llm-zoomcamp-hw2
 cd llm-zoomcamp-hw2
 uv init --no-workspace
+
+2. Install Dependencies
+Install the required packages for the vector search pipeline and the development tools needed to run the notebook:
+
+bash
+
+
+# Core dependencies
+uv add onnxruntime tokenizers numpy tqdm minsearch gitsource
+# Development dependencies (for downloading models and running notebooks)
+uv add --dev huggingface-hub jupyter
+3. Download the Embedder Scripts & Model
+We use a custom, lightweight ONNX embedder rather than the heavy PyTorch sentence-transformers library. Download the helper scripts from the main course repository:
+
+bash
+
+
+PREFIX="https://raw.githubusercontent.com/DataTalksClub/llm-zoomcamp/main/02-vector-search/embed"
+wget $PREFIX/download.py
+wget $PREFIX/embedder.py
+Next, run the download script to fetch the Xenova/all-MiniLM-L6-v2 ONNX model:
+
+bash
+
+
+uv run python download.py
+4. Run the Jupyter Notebook
+With the environment fully configured and the model downloaded, launch Jupyter to view and run the homework notebook:
+
+bash
+
+
+uv run jupyter lab
+Open llmzoomcamp-hw2.ipynb to see the complete implementation of vector search, cosine similarity scoring, and Reciprocal Rank Fusion (RRF).
